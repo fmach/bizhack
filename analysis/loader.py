@@ -15,6 +15,8 @@ _VALUE_PATTERN = re.compile(r"^\s*([+-]?\d+(?:\.\d+)?)\s*([a-zA-Z]+)?\s*$")
 _TIMESTAMP_FORMATS = (
     "%d.%m.%Y %H:%M:%S",
     "%d.%m.%Y %H:%M",
+    "%d. %m. %Y %H:%M:%S",
+    "%d. %m. %Y %H:%M",
     "%Y-%m-%d %H:%M:%S",
     "%Y-%m-%d %H:%M",
 )
@@ -84,6 +86,8 @@ def parse_flow_to_liters(raw_value: str) -> float:
         return numeric_value
     if unit == "ml":
         return numeric_value / 1000.0
+    if unit == "kl":
+        return numeric_value * 1000.0
 
     raise ValueError(f"Unsupported flow unit {unit!r} in value {raw_value!r}")
 
